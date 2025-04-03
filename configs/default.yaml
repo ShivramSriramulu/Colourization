@@ -1,0 +1,82 @@
+# Default configuration for Image Colorization project
+
+# Model Configuration
+model:
+  input_channels: 1  # L channel
+  output_channels: 2  # ab channels
+  num_filters: 64
+  n_down: 8
+  dropout_rate: 0.5
+  leaky_relu_slope: 0.2
+
+# Training Configuration
+training:
+  image_size: [256, 256]
+  batch_size: 32
+  num_workers: 4
+  epochs: 20
+  generator_lr: 2e-4
+  discriminator_lr: 2e-4
+  beta1: 0.5
+  beta2: 0.999
+  lambda_l1: 100.0
+  pretrain_epochs: 5
+  pretrain_lr: 1e-4
+  save_frequency: 5
+  validation_frequency: 2
+
+# Data Configuration
+data:
+  train_size: 8000
+  val_size: 2000
+  external_data_size: 10000
+  data_dir: "./data"
+  train_dir: "./data/train"
+  val_dir: "./data/val"
+  test_dir: "./test_images"
+  image_extensions: [".jpg", ".jpeg", ".png", ".bmp"]
+  normalize_l: true
+  normalize_ab: true
+  l_scale: 50.0
+  ab_scale: 110.0
+
+# Data Augmentation
+augmentation:
+  use_horizontal_flip: true
+  use_random_crop: false
+  use_color_jitter: false
+
+# Logging Configuration
+logging:
+  log_level: "INFO"
+  log_file: "training.log"
+  use_tensorboard: true
+  tensorboard_dir: "./runs"
+  save_samples: true
+  sample_frequency: 100
+  num_samples: 8
+  save_metrics: true
+  metrics_file: "metrics.json"
+
+# Output Configuration
+output:
+  output_dir: "./outputs"
+  model_dir: "./models"
+  results_dir: "./results"
+  model_prefix: "colorization"
+  checkpoint_format: "epoch_{epoch:03d}.pt"
+  save_best_model: true
+  save_last_model: true
+  save_optimizer: true
+
+# Hardware Configuration
+hardware:
+  device: "auto"  # auto, cpu, cuda
+  mixed_precision: false
+  gradient_accumulation_steps: 1
+
+# Experiment Configuration
+experiment:
+  name: "colorization_experiment"
+  seed: 42
+  deterministic: false
