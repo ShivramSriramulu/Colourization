@@ -28,7 +28,7 @@ wheels/
 
 # Jupyter Notebook
 .ipynb_checkpoints/
-*.ipynb
+# *.ipynb  # Allow notebooks in notebooks/ directory
 
 # PyTorch models
 *.pt
